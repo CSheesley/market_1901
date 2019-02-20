@@ -18,4 +18,21 @@ class VendorTest < Minitest::Test
     assert_equal ({}), vendor.inventory
   end
 
+  def test_it_can_check_what_it_has_in_stock
+    vendor = Vendor.new("Rocky Mountain Fresh")
+
+    assert_equal 0, vendor.check_stock("Peaches")
+  end
+
+  def test_it_can_add_to_its_stock
+    vendor = Vendor.new("Rocky Mountain Fresh")
+    vendor.stock("Peaches", 30)
+
+    assert_equal 30, vendor.check_stock("Peaches")
+
+    vendor.stock("Peaches", 25)
+
+    assert_equal 55, vendor.check_stock("Peaches")
+  end
+
 end
